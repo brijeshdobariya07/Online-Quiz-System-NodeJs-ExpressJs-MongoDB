@@ -1,11 +1,25 @@
 const express = require('express');
 const path = require('path');
 const ejs = require('ejs'); 
-require('./src/db/conn.js');
+//require('./src/db/conn.js');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
 const app = express();
+
+mongoose.connect(
+		"mongodb+srv://brijeshd:brijeshd@cluster0.ujvma.mongodb.net/quizProject?retryWrites=true&w=majority",
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
+	)
+	.then(() => {
+		console.log("MongoDB Connected...");
+	})
+	.catch((error) => {
+		console.log(error);
+	});
 
 // Passport Config
 require('./config/passport')(passport);
